@@ -11,6 +11,7 @@ const AlertStyle = styled.div`
   margin: 1rem auto;
   padding: 0.5rem;
   font-size: 0.75rem;
+  box-shadow: 0 5px 5px #eee;
 
   &.success {
     border-left: 3px solid #27ae60;
@@ -33,6 +34,9 @@ const AlertStyle = styled.div`
     color: #57606f;
   }
   .close {
+    border: none;
+    background: none;
+    outline: none;
     color: #57606f;
     position: relative;
     top: -3px;
@@ -47,7 +51,7 @@ const AlertStyle = styled.div`
 
 const Alert = props => {
   const [isShowing, setShowing] = useState(false);
-  const [isError, setError] = useState(props.isError || false);
+  const [isError] = useState(props.isError || false);
 
   return (
     <AlertStyle className={isError ? 'error' : 'success'}>
@@ -57,7 +61,7 @@ const Alert = props => {
         <div className="icon">&#10004;</div>
       )}
       <p><b>{`${isError ? 'Error:' : 'Success:'}`}</b> {props.message}</p>
-      <div className="close">&#10005;</div>
+      <button className="close" onClick={() => props.disable()}>&#10005;</button>
     </AlertStyle>
   )
 }
