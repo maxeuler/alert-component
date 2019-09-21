@@ -7,20 +7,18 @@ function App() {
 
   return (
     <div className="App">
-      {showSuccess && 
-        <Alert 
-          isError={false} 
-          message="Your changes have been saved." 
-          disable={() => setShowSuccess(false)}>
-        </Alert>
-      }
-      {showError && 
-        <Alert 
-          isError={true} 
-          message="Please try again."
-          disable={() => setShowError(false)}>
-        </Alert>
-      }
+      <Alert 
+        isError={false} 
+        message="Your changes have been saved." 
+        disable={() => setShowSuccess(false)}
+        isShowing={showSuccess}
+      ></Alert>
+      <Alert 
+        isError={true} 
+        message="Please try again."
+        disable={() => setShowError(false)}
+        isShowing={showError}
+      ></Alert>
       <button type="button" onClick={() => setShowSuccess(true)}>Success</button>
       <button type="button" onClick={() => setShowError(true)}>Error</button>
     </div>

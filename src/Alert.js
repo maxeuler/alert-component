@@ -12,6 +12,8 @@ const AlertStyle = styled.div`
   padding: 0.5rem;
   font-size: 0.75rem;
   box-shadow: 0 5px 5px #eee;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
 
   &.success {
     border-left: 3px solid #27ae60;
@@ -33,6 +35,7 @@ const AlertStyle = styled.div`
     padding-left: 1rem;
     color: #57606f;
   }
+
   .close {
     border: none;
     background: none;
@@ -47,14 +50,18 @@ const AlertStyle = styled.div`
     max-height: 1.5rem;
     font-size: 0.9rem;
   }
+
+  &.isShowing {
+    opacity: 1;
+  }
 `;
 
 const Alert = props => {
-  const [isShowing, setShowing] = useState(false);
+  const [isShowing, setShowing] = useState(props.isShowing || false);
   const [isError] = useState(props.isError || false);
 
   return (
-    <AlertStyle className={isError ? 'error' : 'success'}>
+    <AlertStyle className={`${isError ? 'error' : 'success'} ${props.isShowing ? 'isShowing' : null}`}>
       {isError ? (
         <div className="icon">&#10008;</div>
       ) : (
